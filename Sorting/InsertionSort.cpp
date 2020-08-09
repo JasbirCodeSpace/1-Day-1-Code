@@ -25,6 +25,13 @@ int main()
     return 0;
 }
 
+// Time Complexity: O(n^2) Auxilliary Space: O(1)
+// Boundary Cases: Insertion sort takes maximum time to sort if elements are sorted in reverse order.
+// And it takes minimum time (Order of n) when elements are already sorted.
+
+// Uses : Insertion sort is used when number of elements is small.
+// It can also be useful when input array is almost sorted.
+
 void insertion_sort(vector<int> &arr)
 {
     int i, j, key;

@@ -35,7 +35,7 @@ int main()
 void tim_sort(vector<int> &arr)
 {
     int right = 0, mid = 0;
-    vector<int> temp(arr);
+    vector<int> temp(arr.size(), 0);
     for (int i = 0; i < arr.size(); i += RUN)
     {
         insertion_sort(arr, i, min(RUN + i - 1, (int)arr.size() - 1));
