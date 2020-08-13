@@ -5,16 +5,18 @@ Your program is to use the brute-force approach in order to find the Answer to L
 </p>
 
 <h2>Example</h2>
+
+#### Input:
 ```
-Input:
 1
 2
 88
 42
 99
 ```
+
+#### Output:
 ```
-Output:
 1
 2
 88
