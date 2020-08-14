@@ -15,8 +15,10 @@ For each test case, display the reverse of the given number N, in a new line.
 </p>
 
 <h2>Constraints</h2>
-* 1 ≤ T ≤ 1000
-* 1 ≤ N ≤ 1000000
+
+- 1 ≤ T ≤ 1000
+
+- 1 ≤ N ≤ 1000000
 
 #### Input:
 
