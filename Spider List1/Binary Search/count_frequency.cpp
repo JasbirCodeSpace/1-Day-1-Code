@@ -62,8 +62,8 @@ int firstOcc(int *arr, int l, int r, int size, int key){
     if(r >= l){
         int m = (l + r)/2;
         if( (m == 0 || arr[m-1]<key) && arr[m] == key)return m;
-        else if(arr[m]<key) return firstOcc(arr, m+1, r, size, key);    // these orders are important
-        else return firstOcc(arr, l, m-1, size, key);
+        else if(arr[m]>=key) return firstOcc(arr, l, m-1, size, key);    // these orders are important
+        else return firstOcc(arr, m+1, r, size, key);
     }
     return -1;
 }
@@ -73,8 +73,8 @@ int lastOcc(int *arr, int l, int r, int size, int key){
     if(r >= l){
         int m = (l + r)/2;
         if((m==size-1 || arr[m+1] > key) && arr[m] == key) return m;
-        else if(key < arr[m]) return lastOcc(arr, l, m-1, size, key);   // these orders are important
-        else return lastOcc(arr, m+1, r, size, key);
+        else if(key >= arr[m]) return lastOcc(arr, m+1, r, size, key);   // these orders are important
+        else return lastOcc(arr, l, m-1, size, key);
     }
     return -1;
 }

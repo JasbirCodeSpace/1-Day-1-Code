@@ -9,6 +9,7 @@ int *arr;
 int key;
 
 int floorValueBS(int arr[], int size, int key);
+int ceilValueBS(int arr[], int size, int key);
 void readFile();
 void printArray(int arr[], int size);
 int main(){
@@ -20,19 +21,36 @@ int main(){
 }
 
 int floorValueBS(int arr[], int size, int key){
-    if(key<arr[0])return -1;
-    int l = 0, r = size-1, m;
-
-    while (r - l > 1)
-    {
-        m = l + (r-l)/2;
-        if(arr[m]<=key) l = m;
-        else r = m;
+    int l=0, h=size-1, m;
+    int floor=-1;
+    while(l<=h){
+        m = (l+h)/2;
+        if(arr[m]==key)
+            return m;
+        else if(arr[m]<key){
+            floor = m;
+            l = m+1;
+        }else
+            h = m-1;
     }
+    return floor;
+}
 
-    if(arr[r] < key)return arr[r];
-    return arr[l];
-    
+int ceilValueBS(int* arr, int size, int key){
+    int l=0, h=size-1, m;
+    int ceil = -1;
+    while(l<=h){
+        m = (l+h)/2;
+        if(arr[m]==key)
+            return m;
+        else if(arr[m]<key)
+            l = m+1;
+        else{
+            ceil = m;
+            h = m-1;
+        }
+    }
+    return ceil;
 }
 void readFile(){
     ifstream file;

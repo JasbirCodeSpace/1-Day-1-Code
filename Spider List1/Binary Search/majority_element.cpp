@@ -85,3 +85,28 @@ void printArray(int arr[], int size){
     }
     
 }
+
+
+// int binarySearch(int *arr, int l, int h, int key){
+//     int mid;
+//     while(l<=h){
+//         mid = (l+h)/2;
+//         if((mid==0 || key>arr[mid-1]) && arr[mid]==key)
+//             return mid;
+//         else if(arr[mid]<key)
+//             l = mid+1;
+//         else
+//             h = mid-1;
+//     }
+//     return -1;
+// }
+
+// bool findMajority(int *arr, int n, int x){
+//     int i = binarySearch(arr, 0, n-1, x);
+//     if(i==-1)
+//     return false;
+    
+//     if(((i + n/2) < n) && arr[i+n/2]==x)
+//         return true;
+//     return false;
+// }
