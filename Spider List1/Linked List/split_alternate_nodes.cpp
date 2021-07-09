@@ -14,8 +14,12 @@ void printList(Node* head);
     Time complexity: O(N)
     Space complexity: O(1)
 */
-void splitAlternateNodes(Node *head, Node **a, Node **b);
-int main(int argc, int const *argv[])
+void splitAlternateNodes1(Node *head, Node **a, Node **b);
+
+void splitAlternateNodes2(Node *head, Node **a, Node **b);
+void split(Node *a, Node *b);
+
+int main()
 {
 
     Node* head = NULL;
@@ -32,7 +36,7 @@ int main(int argc, int const *argv[])
     cout<<"Original linked List: ";
     printList(head);
      
-    splitAlternateNodes(head, &a, &b);
+    splitAlternateNodes1(head, &a, &b);
      
     cout<<"\nResultant Linked List 'a' : ";
     printList(a);        
@@ -41,7 +45,7 @@ int main(int argc, int const *argv[])
     printList(b); 
     return 0;
 }
-void splitAlternateNodes(Node *head, Node **a, Node **b){
+void splitAlternateNodes1(Node *head, Node **a, Node **b){
 
     Node* curr = head;
     Node *aHead = NULL, *aTail = NULL;
@@ -75,6 +79,25 @@ void splitAlternateNodes(Node *head, Node **a, Node **b){
     *b = bHead;
 }
 
+void splitAlternateNodes2(Node *head, Node **a, Node **b){
+    
+    if(head == NULL)
+        return;
+    *a = head;
+    *b = head->next;
+    split(*a, *b);
+}
+
+void split(Node *a, Node *b){
+    if(a == NULL || b == NULL)
+        return;
+    if(a->next)
+        a->next = a->next->next;
+    if(b->next)
+        b->next = b->next->next;
+    split(a->next, b->next);
+
+}
 void insert(Node** head, int x){
     Node* newNode = new Node();
     newNode->data = x;

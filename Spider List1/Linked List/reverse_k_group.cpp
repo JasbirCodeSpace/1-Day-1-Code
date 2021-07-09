@@ -9,7 +9,18 @@ class Node{
 
 void insert(Node** head, int x);
 void printList(Node* head);
-Node* reverseKGroup(Node* head, int k);
+
+/*
+    Time complexity: O(n)
+    Space complexity: O(n/k)
+*/
+Node* reverseKGroup1(Node* head, int k);
+
+/*
+    Time complexity: O(n)
+    Space complexity: O(k)
+*/
+Node* reverseKGroup2(Node* head, int k);
 
 int main(int argc, char const *argv[])
 {
@@ -19,7 +30,7 @@ int main(int argc, char const *argv[])
  
     cout << "Given linked list \n";
     printList(head);
-    head = reverseKGroup(head, 3);
+    head = reverseKGroup2(head, 3);
  
     cout << "\nReversed Linked list \n";
     printList(head);   
@@ -30,7 +41,7 @@ int main(int argc, char const *argv[])
     Time complexity: O(N)
     Space complexity: O(N/K)
 */
-Node* reverseKGroup(Node* head, int k){
+Node* reverseKGroup1(Node* head, int k){
 
     Node *prev = NULL, *next = NULL, *curr = head;
     int i=0;
@@ -44,13 +55,41 @@ Node* reverseKGroup(Node* head, int k){
     }
 
     if(next)
-        head->next = reverseKGroup(next, k);
+        head->next = reverseKGroup1(next, k);
         
     return prev;
     
 }
 
-
+/*
+    Time complexity: O(N)
+    Space complexity: O(K)
+*/
+Node* reverseKGroup2(Node* head, int k ){
+    stack<Node*> stk;
+    Node* curr = head;
+    Node* prev = NULL;
+    while(curr){
+        int i = 0;
+        while(curr && i<k){
+            stk.push(curr);
+            curr = curr->next;
+            i++;
+        }
+        while(!stk.empty()){
+            if(prev == NULL){
+                prev = stk.top();
+                head = prev;
+            }else{
+                prev->next = stk.top();
+                prev = prev->next;
+            }
+            stk.pop();
+        }
+    }
+    prev->next = NULL;
+    return head;
+}
 void insert(Node** head, int x){
     Node *newNode = new Node();
     newNode->data = x;
