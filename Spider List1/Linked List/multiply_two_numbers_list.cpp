@@ -14,6 +14,14 @@ void printList(Node *head);
     Space Complexity: O(1)
 */
 double mulTwoList(Node *a, Node *b);
+
+/*
+    Time complexity: O(M*N)
+*/
+Node* multiplyTwoList(Node* a, Node* b);
+int reverse(Node** head);
+Node* makeEmptyList(int n);
+
 int main(int argc, char const *argv[])
 {
     Node *head1 = NULL, *head2 = NULL; 
@@ -34,7 +42,12 @@ int main(int argc, char const *argv[])
     printList(head1);
     printList(head2);
     double result=mulTwoList(head1, head2);
-    cout<<"Product = "<<result<<endl;   
+    cout<<"Product = "<<result<<endl; 
+
+    Node* res = multiplyTwoList(head1, head2);
+    printList(head1);
+    printList(head2);
+    printList(res);  
     return 0;
 }
 
@@ -49,6 +62,71 @@ double mulTwoList(Node *a, Node *b){
         b = b->next;
     }
     return x*y;
+}
+
+int reverse(Node** head){
+    Node *curr=*head, *prev = NULL, *next = NULL;
+    int count = 0;
+    while(curr){
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+        count++;
+    }
+    *head = prev;
+    return count;
+}
+
+Node* makeEmptyList(int n){
+
+    Node* head = NULL;
+    while(n--){
+        Node* newNode = new Node;
+        newNode->data = 0;
+        newNode->next = NULL;
+        newNode->next = head;
+        head = newNode;
+    }
+    return head;
+}
+
+Node* multiplyTwoList(Node* a, Node* b){
+    int m = reverse(&a);
+    int n = reverse(&b);
+    Node* result = makeEmptyList(m+n+1);
+    Node *first = NULL, *second = b, *result1 = result, *result2 = NULL;
+
+
+    while(second){
+        int carry = 0;
+        result2 = result1;
+        first = a;
+        while(first){
+            int mul = first->data * second->data + carry;
+            result2->data += mul%10;
+            carry = mul/10 + result2->data/10;
+            result2->data = result2->data%10;
+        
+            first = first->next;
+            result2 = result2->next;
+        }
+        if(carry){
+            result2->data += carry;
+        }
+        result1 = result1->next;
+        second = second->next;
+    }
+
+    reverse(&result);
+    reverse(&a);
+    reverse(&b);
+    while(result->data == 0){
+        Node *temp = result;
+        result = result->next;
+        free(temp);
+    }
+    return result;
 }
 void insert(Node **head, int x){
     Node *newNode = new Node();
